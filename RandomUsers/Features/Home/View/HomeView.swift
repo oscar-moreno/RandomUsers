@@ -24,6 +24,9 @@ struct HomeView: View {
                     }
                     .listRowSeparator(.hidden)
                 }
+                .onDelete(perform: { indexSet in
+                    viewModel.delete(at: indexSet)
+                })
                 .padding()
             }
             .listStyle(.plain)

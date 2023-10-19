@@ -46,4 +46,8 @@ class HomeVM: ObservableObject, HomeViewModel {
 
         return index + 4 == users.count
     }
+    
+    func delete(at offsets: IndexSet) {
+        users.remove(atOffsets: offsets)
+    }
 }
