@@ -24,6 +24,10 @@ struct UserView: View {
                 .bold()
                 .padding(10)
                 VStack(alignment: .leading, spacing: 2) {
+                    UserDataView(userDataTitle: NSLocalizedString("email_title",
+                                                                  comment: ""), userDataValue: String(user.email))
+                    UserDataView(userDataTitle: NSLocalizedString("phone_title",
+                                                                  comment: ""), userDataValue: String(user.phone))
                     UserDataView(userDataTitle: NSLocalizedString("age_title",
                                                                   comment: ""), userDataValue: String(user.dob.age))
                     UserDataView(userDataTitle: NSLocalizedString("city_title",

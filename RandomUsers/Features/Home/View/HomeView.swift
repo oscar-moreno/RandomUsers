@@ -10,16 +10,23 @@ struct HomeView: View {
     
     var body: some View {
         NavigationStack {
-            ScrollView {
+            List {
                 ForEach(viewModel.users, id: \.email) { user in
                     NavigationLink {
                         UserView(user: user)
                     } label: {
                         UserItemListView(user: user)
                     }
+                    .task {
+                        if viewModel.mustLoadMoreUsers(from: user) {
+                            await viewModel.loadUsers()
+                        }
+                    }
+                    .listRowSeparator(.hidden)
                 }
                 .padding()
             }
+            .listStyle(.plain)
             .refreshable {
                 Task {
                     await viewModel.loadUsers()

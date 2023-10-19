@@ -19,7 +19,7 @@ class HomeVM: ObservableObject, HomeViewModel {
     }
     
     func loadUsers() async {
-        let params = NetworkParams(results: String(5))
+        let params = NetworkParams(results: String(10))
         await fetchUsers(with: params)
     }
     
@@ -39,5 +39,11 @@ class HomeVM: ObservableObject, HomeViewModel {
                 }
             }
         }
+    }
+    
+    func mustLoadMoreUsers(from user: User) -> Bool {
+        guard let index = users.firstIndex(where: { $0.email == user.email }) else { return false }
+
+        return index + 4 == users.count
     }
 }

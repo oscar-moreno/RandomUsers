@@ -28,13 +28,13 @@ struct UserItemListView: View {
                 }
                 .frame(maxWidth: .infinity,
                        alignment: .leading)
-                Text(user.email)
+                Text(user.location.city)
                     .font(.headline)
                     .foregroundColor(.primary)
                     .lineLimit(1)
                     .frame(maxWidth: .infinity,
                            alignment: .leading)
-                Text(user.phone)
+                Text(user.location.country)
                     .font(.headline)
                     .foregroundColor(.primary)
                     .lineLimit(1)
