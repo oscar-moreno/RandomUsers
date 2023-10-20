@@ -1,6 +1,6 @@
 import Foundation
 
-class DependencyInjection {
+final class DependencyInjection {
     private let networkService: NetworkService
     private let homeViewModel: HomeVM
     private let httpClient: HTTPClient

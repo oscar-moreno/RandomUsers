@@ -6,6 +6,8 @@ protocol NetworkService {
 
 struct NetworkParams {
     let results: String?
+    let seed: String?
+    let page: String?
 }
 
 struct RandomUsersNetworkService: NetworkService {
@@ -21,6 +23,8 @@ struct RandomUsersNetworkService: NetworkService {
         
         var query = [String: String]()
         query[RandomUsersNetworkData.resultsParam] = params.results
+        query[RandomUsersNetworkData.seedParam] = params.seed
+        query[RandomUsersNetworkData.pageParam] = params.page
         
         query.forEach { key, value in
             let queryItem = URLQueryItem(name: key, value: value)

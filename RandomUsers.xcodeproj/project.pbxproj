@@ -27,6 +27,7 @@
 		553DC5C72AE0771E00850977 /* UserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553DC5C62AE0771E00850977 /* UserView.swift */; };
 		553DC5C92AE0781700850977 /* UserDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553DC5C82AE0781700850977 /* UserDataView.swift */; };
 		553DC5CC2AE078BE00850977 /* String+CapitalizeFirst.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553DC5CB2AE078BE00850977 /* String+CapitalizeFirst.swift */; };
+		55B07FF02AE255250098016C /* Debouncer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B07FEF2AE255250098016C /* Debouncer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,6 +52,7 @@
 		553DC5C62AE0771E00850977 /* UserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserView.swift; sourceTree = "<group>"; };
 		553DC5C82AE0781700850977 /* UserDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataView.swift; sourceTree = "<group>"; };
 		553DC5CB2AE078BE00850977 /* String+CapitalizeFirst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+CapitalizeFirst.swift"; sourceTree = "<group>"; };
+		55B07FEF2AE255250098016C /* Debouncer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Debouncer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +89,7 @@
 				553DC5CA2AE078A700850977 /* Extensions */,
 				553DC5AC2AE048D100850977 /* Features */,
 				553DC59E2AE0457C00850977 /* Network */,
+				55B07FED2AE255050098016C /* Utils */,
 				553DC5902AE044D700850977 /* RandomUsersApp.swift */,
 				553DC5BD2AE050D400850977 /* DependencyInjection.swift */,
 				553DC5942AE044D800850977 /* Assets.xcassets */,
@@ -219,6 +222,22 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		55B07FED2AE255050098016C /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				55B07FEE2AE2550D0098016C /* Debouncer */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		55B07FEE2AE2550D0098016C /* Debouncer */ = {
+			isa = PBXGroup;
+			children = (
+				55B07FEF2AE255250098016C /* Debouncer.swift */,
+			);
+			path = Debouncer;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -306,6 +325,7 @@
 				553DC5A62AE0460B00850977 /* RandomUsersNetworkData.swift in Sources */,
 				553DC5C92AE0781700850977 /* UserDataView.swift in Sources */,
 				553DC5A02AE0459300850977 /* Endpoint.swift in Sources */,
+				55B07FF02AE255250098016C /* Debouncer.swift in Sources */,
 				553DC5912AE044D700850977 /* RandomUsersApp.swift in Sources */,
 				553DC5C72AE0771E00850977 /* UserView.swift in Sources */,
 			);

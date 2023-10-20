@@ -2,7 +2,14 @@
   "sourceLanguage" : "en",
   "strings" : {
     "%@:" : {
-
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@:"
+          }
+        }
+      }
     },
     "age_title" : {
       "extractionState" : "manual",
@@ -72,6 +79,9 @@
         }
       }
     },
+    "email_title" : {
+
+    },
     "home_view_title" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -85,6 +95,26 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Usuarios"
+          }
+        }
+      }
+    },
+    "phone_title" : {
+
+    },
+    "search_prompt" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Search"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Buscar"
           }
         }
       }

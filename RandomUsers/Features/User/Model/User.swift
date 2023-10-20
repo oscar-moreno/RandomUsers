@@ -7,7 +7,7 @@ struct Users: Decodable {
 }
 
 // MARK: - Info
-struct Info: Codable {
+struct Info: Decodable {
     let seed: String
     let results, page: Int
     let version: String

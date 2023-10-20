@@ -12,10 +12,11 @@ struct HomeView: View {
         NavigationStack {
             List {
                 ForEach(viewModel.users, id: \.email) { user in
-                    NavigationLink {
-                        UserView(user: user)
-                    } label: {
+                    ZStack {
                         UserItemListView(user: user)
+                        NavigationLink(destination: UserView(user: user)) {
+                        }
+                        .buttonStyle(PlainButtonStyle()).frame(width:0).opacity(0)
                     }
                     .task {
                         if viewModel.mustLoadMoreUsers(from: user) {
@@ -23,11 +24,11 @@ struct HomeView: View {
                         }
                     }
                     .listRowSeparator(.hidden)
+                    .padding(.init(top: 1, leading: 0, bottom: 1, trailing: 0))
                 }
                 .onDelete(perform: { indexSet in
                     viewModel.delete(at: indexSet)
                 })
-                .padding()
             }
             .listStyle(.plain)
             .refreshable {
@@ -44,7 +45,14 @@ struct HomeView: View {
         .task {
             await viewModel.loadUsers()
         }
-        .disableAutocorrection(true)
+        .searchable(text: $viewModel.usersSearchText, prompt: "search_prompt")
+        .autocorrectionDisabled()
+        .autocapitalization(.none)
+        .onChange(of: viewModel.usersSearchText, { _, newValue in
+            viewModel.resetUsers()
+            viewModel.usersSearchText = newValue
+            viewModel.loadUsersDebounced()
+        })
     }
 }
 
