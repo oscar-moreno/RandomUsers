@@ -48,7 +48,8 @@ final class HomeVM: ObservableObject, HomeViewModel {
                     self.users.append(contentsOf: result.results.filter { user in
                         user.name.first.contains(self.usersSearchText) ||
                         user.name.last.contains(self.usersSearchText) ||
-                        user.email.contains(self.usersSearchText)
+                        user.email.contains(self.usersSearchText) &&
+                        !self.users.contains(where: { $0.email == user.email })
                     })
                 }
                 self.users.removeAll(where: { user in
