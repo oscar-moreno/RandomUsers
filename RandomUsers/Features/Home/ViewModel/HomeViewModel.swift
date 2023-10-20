@@ -51,6 +51,9 @@ final class HomeVM: ObservableObject, HomeViewModel {
                         user.email.contains(self.usersSearchText)
                     })
                 }
+                self.users.removeAll(where: { user in
+                    self.removedUsers.contains(where: { $0.email == user.email })
+                })
             }
         } catch {
             DispatchQueue.main.async {
