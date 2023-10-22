@@ -41,43 +41,63 @@ final class HomeVM: ObservableObject, HomeViewModel {
         debouncer.call()
     }
     
+    fileprivate func fetchAllUsers(with result: Users) {
+        self.users.append(contentsOf: result.results.filter { user in
+            !self.users.contains(where: { $0.email == user.email })
+        })
+    }
+    
+    fileprivate func fetchSearchedUsers(with result: Users) {
+        self.users.append(contentsOf: result.results.filter { user in
+            user.name.first.contains(self.usersSearchText) ||
+            user.name.last.contains(self.usersSearchText) ||
+            user.email.contains(self.usersSearchText) &&
+            !self.users.contains(where: { $0.email == user.email })
+        })
+    }
+    
+    fileprivate func removeDuplicatedUsersByEmail() {
+        self.users.removeAll(where: { user in
+            self.removedUsers.contains(where: { $0.email == user.email })
+        })
+    }
+    
+    fileprivate func resetIsBlackListedParam() {
+        self.users = self.users.map { user in
+            if self.usersBlacklist.contains(where: { $0.email == user.email }) {
+                var user = user
+                user.isBlackListed = true
+                return user
+            }
+            return user
+        }
+    }
+    
+    fileprivate func handleFetchError(_ error: Error) {
+        DispatchQueue.main.async {
+            self.error = error as? RequestError
+            if self.error != .notFound {
+                self.showWarningMessage =
+                RandomUsersNetworkData.NetworErrorMessages.dataNotAvailable.localizedString()
+                self.showWarning = true
+            }
+        }
+    }
+    
     func fetchUsers(with params: NetworkParams) async {
         do {
             let result = try await networkService.getUsers(with: params)
             DispatchQueue.main.async {
                 if self.usersSearchText.isEmpty {
-                    self.users.append(contentsOf: result.results.filter { user in
-                        !self.users.contains(where: { $0.email == user.email })
-                    })
+                    self.fetchAllUsers(with: result)
                 } else {
-                    self.users.append(contentsOf: result.results.filter { user in
-                        user.name.first.contains(self.usersSearchText) ||
-                        user.name.last.contains(self.usersSearchText) ||
-                        user.email.contains(self.usersSearchText) &&
-                        !self.users.contains(where: { $0.email == user.email })
-                    })
+                    self.fetchSearchedUsers(with: result)
                 }
-                self.users.removeAll(where: { user in
-                    self.removedUsers.contains(where: { $0.email == user.email })
-                })
-                self.users = self.users.map { user in
-                    if self.usersBlacklist.contains(where: { $0.email == user.email }) {
-                        var user = user
-                        user.isBlackListed = true
-                        return user
-                    }
-                    return user
-                }
+                self.removeDuplicatedUsersByEmail()
+                self.resetIsBlackListedParam()
             }
         } catch {
-            DispatchQueue.main.async {
-                self.error = error as? RequestError
-                if self.error != .notFound {
-                    self.showWarningMessage =
-                    RandomUsersNetworkData.NetworErrorMessages.dataNotAvailable.localizedString()
-                    self.showWarning = true
-                }
-            }
+            handleFetchError(error)
         }
     }
     
@@ -98,15 +118,28 @@ final class HomeVM: ObservableObject, HomeViewModel {
         }
     }
     
-    func setBlackListed(_ user: User) {
-        guard let index = users.firstIndex(where: { $0.email == user.email }) else { return }
+    fileprivate func toggleIsBlackListedParam(with user: User) -> User {
+        guard let index = users.firstIndex(where: { $0.email == user.email }) else { return user}
         users[index].isBlackListed = !(user.isBlackListed ?? false)
-        if users[index].isBlackListed ?? false {
-            if !usersBlacklist.contains(where: { $0.email == user.email }) {
-                usersBlacklist.append(user)
-            }
+        return users[index]
+    }
+    
+    fileprivate func addUserToBlacklist(_ user: User) {
+        if !usersBlacklist.contains(where: { $0.email == user.email }) {
+            usersBlacklist.append(user)
+        }
+    }
+    
+    fileprivate func removeUserFromBlacklist(_ user: User) {
+        usersBlacklist.removeAll(where: { $0.email == user.email })
+    }
+    
+    func setBlackListed(_ user: User) {
+        let userToggled = toggleIsBlackListedParam(with: user)
+        if userToggled.isBlackListed ?? false {
+            addUserToBlacklist(user)
         } else {
-            usersBlacklist.removeAll(where: { $0.email == user.email })
+            removeUserFromBlacklist(user)
         }
     }
     
