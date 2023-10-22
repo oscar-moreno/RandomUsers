@@ -6,15 +6,24 @@ struct UserView: View {
     var body: some View {
         ScrollView {
             VStack {
-                if let imageUrl = URL(string: user.picture.large) {
-                    AsyncImage(url: imageUrl)
-                        .cornerRadius(20)
-                        .scaledToFit()
-                        .padding()
-                } else {
-                    Image("user-placeholder")
-                        .cornerRadius(20)
-                        .padding()
+                ZStack {
+                    if let imageUrl = URL(string: user.picture.large) {
+                        AsyncImage(url: imageUrl)
+                            .cornerRadius(20)
+                            .scaledToFit()
+                            .padding()
+                    } else {
+                        Image("user-placeholder")
+                            .cornerRadius(20)
+                            .padding()
+                    }
+                    if user.isBlackListed ?? false {
+                        Image(systemName:"x.circle")
+                            .opacity(0.6)
+                            .frame(maxWidth: .infinity,alignment: .center)
+                            .scaleEffect(5.0)
+                            .foregroundStyle(.black)
+                    }
                 }
                 HStack {
                     Text(user.name.first)
@@ -50,6 +59,7 @@ struct UserView: View {
 
 struct UserView_Previews: PreviewProvider {
     static var previews: some View {
-        UserView(user: User.exampleToPreview())
+        UserView(user: User.exampleToPreview(isBlacklisted: false))
+        UserView(user: User.exampleToPreview(isBlacklisted: true))
     }
 }

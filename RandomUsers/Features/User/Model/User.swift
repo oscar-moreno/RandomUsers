@@ -21,14 +21,16 @@ struct User: Decodable {
     let picture: Picture
     let dob: Dob
     let location: Location
+    var isBlackListed: Bool?
     
-    static func exampleToPreview() -> User {
+    static func exampleToPreview(isBlacklisted: Bool?) -> User {
         User(name: Name(first: "John", last: "Doe"),
              email: "john@adevinta.com",
              phone: "(555) 123-456",
              picture: Picture(thumbnail: "", large: ""),
              dob: Dob(age: Int.random(in: 25...45)),
-             location: Location(city: "Barcelona", state: "Catalunya", country: "Spain"))
+             location: Location(city: "Barcelona", state: "Catalunya", country: "Spain"),
+             isBlackListed: isBlacklisted)
     }
 }
 

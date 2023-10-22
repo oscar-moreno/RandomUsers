@@ -28,6 +28,22 @@
         }
       }
     },
+    "blacklist_swipe_action" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Send to blacklist"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enviar a lista negra"
+          }
+        }
+      }
+    },
     "city_title" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -75,6 +91,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Datos no disponibles"
+          }
+        }
+      }
+    },
+    "delete_swipe_action" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delete user"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eliminar usuario"
           }
         }
       }

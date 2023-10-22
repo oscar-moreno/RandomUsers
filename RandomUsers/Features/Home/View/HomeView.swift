@@ -18,6 +18,19 @@ struct HomeView: View {
                         }
                         .buttonStyle(PlainButtonStyle()).frame(width:0).opacity(0)
                     }
+                    .swipeActions {
+                        Button(role: .destructive) {
+                            viewModel.delete(user)
+                        } label: {
+                            Label("delete_swipe_action", systemImage: "trash")
+                        }
+                        Button {
+                            viewModel.toogleBlackListed(user)
+                        } label: {
+                            let blackListIcon = viewModel.getBlacklistIcon(user)
+                            Label("blacklist_swipe_action", systemImage: blackListIcon)
+                        }
+                    }
                     .task {
                         if viewModel.mustLoadMoreUsers(from: user) {
                             await viewModel.loadUsers()
@@ -26,9 +39,6 @@ struct HomeView: View {
                     .listRowSeparator(.hidden)
                     .padding(.init(top: 1, leading: 0, bottom: 1, trailing: 0))
                 }
-                .onDelete(perform: { indexSet in
-                    viewModel.delete(at: indexSet)
-                })
             }
             .listStyle(.plain)
             .refreshable {

@@ -2,6 +2,7 @@ import Foundation
 import SwiftUI
 
 protocol HomeViewModel {
+    var usersBlacklist: [User] { get set }
     func loadUsers() async
 }
 
@@ -11,10 +12,13 @@ final class HomeVM: ObservableObject, HomeViewModel {
     @Published var usersSearchText = ""
     
     var removedUsers = [User]()
+    var usersBlacklist = [User]()
     let networkService: NetworkService
     var showWarningMessage = ""
     var currentPage = 0
     private var error: RequestError?
+    private var blacklistIcon = "xmark.bin"
+    private var notBlacklistIcon = "arrow.up.bin"
     
     init(networkService: NetworkService) {
         self.networkService = networkService
@@ -70,15 +74,12 @@ final class HomeVM: ObservableObject, HomeViewModel {
     
     func mustLoadMoreUsers(from user: User) -> Bool {
         guard let index = users.firstIndex(where: { $0.email == user.email }) else { return false }
-
         return index + 4 == users.count
     }
     
-    func delete(at offsets: IndexSet) {
-        for index in offsets {
-            removedUsers.append(users[index])
-        }
-        users.remove(atOffsets: offsets)
+    func delete(_ user: User) {
+        removedUsers.append(user)
+        users.removeAll(where: { $0.email == user.email })
     }
     
     func resetUsers() {
@@ -86,5 +87,21 @@ final class HomeVM: ObservableObject, HomeViewModel {
         DispatchQueue.main.async {
             self.users = [User]()
         }
+    }
+    
+    func toogleBlackListed(_ user: User) {
+        guard let index = users.firstIndex(where: { $0.email == user.email }) else { return }
+        users[index].isBlackListed = !(user.isBlackListed ?? false)
+        if users[index].isBlackListed ?? false {
+            if !usersBlacklist.contains(where: { $0.email == user.email }) {
+                usersBlacklist.append(user)
+            }
+        } else {
+            usersBlacklist.removeAll(where: { $0.email == user.email })
+        }
+    }
+    
+    func getBlacklistIcon(_ user: User) -> String {
+        !(user.isBlackListed ?? false) ? blacklistIcon : notBlacklistIcon
     }
 }

@@ -5,16 +5,25 @@ struct UserItemListView: View {
     
     var body: some View {
         HStack {
-            if let imageUrl = URL(string: user.picture.thumbnail) {
-                AsyncImage(url: imageUrl)
-                    .cornerRadius(20)
-                    .scaledToFit()
-            } else {
-                Image("user-placeholder")
-                    .resizable()
-                    .cornerRadius(20)
-                    .scaledToFit()
+            ZStack {
+                if let imageUrl = URL(string: user.picture.thumbnail) {
+                    AsyncImage(url: imageUrl)
+                        .cornerRadius(10)
+                        .scaledToFit()
+                } else {
+                    Image("user-placeholder")
+                        .resizable()
+                        .cornerRadius(20)
+                        .scaledToFit()
+                }
+                if user.isBlackListed ?? false {
+                    Image(systemName:"x.circle")
+                        .opacity(0.6)
+                        .scaleEffect(3.0)
+                        .foregroundStyle(.black)
+                }
             }
+            
             VStack {
                 HStack {
                     Text(user.name.first)
@@ -48,6 +57,7 @@ struct UserItemListView: View {
 
 struct UserListItemView_Previews: PreviewProvider {
     static var previews: some View {
-        UserItemListView(user: User.exampleToPreview())
+        UserItemListView(user: User.exampleToPreview(isBlacklisted: false))
+        UserItemListView(user: User.exampleToPreview(isBlacklisted: true))
     }
 }
