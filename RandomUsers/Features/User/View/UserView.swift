@@ -8,7 +8,7 @@ struct UserView: View {
             VStack {
                 ZStack {
                     if let imageUrl = URL(string: user.picture.large) {
-                        AsyncImage(url: imageUrl)
+                        RemoteImage(url: imageUrl)
                             .cornerRadius(20)
                             .scaledToFit()
                             .padding()
@@ -19,9 +19,9 @@ struct UserView: View {
                     }
                     if user.isBlackListed ?? false {
                         Image(systemName:K.Images.blackListMark)
-                            .opacity(0.6)
+                            .opacity(0.7)
                             .frame(maxWidth: .infinity,alignment: .center)
-                            .scaleEffect(5.0)
+                            .scaleEffect(7.0)
                             .foregroundStyle(.black)
                     }
                 }

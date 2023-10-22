@@ -27,7 +27,7 @@ struct User: Decodable {
         User(name: Name(first: "John", last: "Doe"),
              email: "john@adevinta.com",
              phone: "(555) 123-456",
-             picture: Picture(thumbnail: "", large: ""),
+             picture: Picture(large: ""),
              dob: Dob(age: Int.random(in: 25...45)),
              location: Location(city: "Barcelona", state: "Catalunya", country: "Spain"),
              isBlackListed: isBlacklisted)
@@ -42,7 +42,6 @@ struct Name: Decodable {
 
 // MARK: - Picture
 struct Picture: Decodable {
-    let thumbnail: String
     let large: String
 }
 

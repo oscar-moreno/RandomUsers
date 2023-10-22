@@ -6,20 +6,20 @@ struct UserItemListView: View {
     var body: some View {
         HStack {
             ZStack {
-                if let imageUrl = URL(string: user.picture.thumbnail) {
-                    AsyncImage(url: imageUrl)
+                if let imageUrl = URL(string: user.picture.large) {
+                    RemoteImage(url: imageUrl)
                         .cornerRadius(10)
                         .scaledToFit()
                 } else {
                     Image(K.Images.userPlaceHolder)
                         .resizable()
-                        .cornerRadius(20)
+                        .cornerRadius(10)
                         .scaledToFit()
                 }
                 if user.isBlackListed ?? false {
                     Image(systemName: K.Images.blackListMark)
-                        .opacity(0.6)
-                        .scaleEffect(3.0)
+                        .opacity(0.7)
+                        .scaleEffect(7.0)
                         .foregroundStyle(.black)
                 }
             }
