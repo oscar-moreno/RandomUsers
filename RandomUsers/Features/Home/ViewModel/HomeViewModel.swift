@@ -90,7 +90,7 @@ final class HomeVM: ObservableObject, HomeViewModel {
         }
     }
     
-    func toogleBlackListed(_ user: User) {
+    func setBlackListed(_ user: User) {
         guard let index = users.firstIndex(where: { $0.email == user.email }) else { return }
         users[index].isBlackListed = !(user.isBlackListed ?? false)
         if users[index].isBlackListed ?? false {

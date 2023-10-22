@@ -28,7 +28,7 @@ struct HomeView: View {
                             Label("delete_swipe_action", systemImage: "trash")
                         }
                         Button {
-                            viewModel.toogleBlackListed(user)
+                            viewModel.setBlackListed(user)
                         } label: {
                             let blackListIcon = viewModel.getBlacklistIcon(user)
                             Label("blacklist_swipe_action", systemImage: blackListIcon)

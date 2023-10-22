@@ -24,16 +24,16 @@ final class HomeViewModelTests: XCTestCase {
     
     func buildFakeResults(usersNumber: Int) -> [User] {
             var fakeResults = [User]()
-            for index in 1...usersNumber {
-                fakeResults.append(User(name: Name(first: "FakeFirstName \(index)", last: "FakeLastName \(index)"),
-                                        email: "FakeEmail \(index)",
-                                        phone:"FakePhone \(index)",
-                                        picture: Picture(thumbnail: "FakePicThumbnail \(index)",
-                                                         large: "FakePicLarge \(index)"),
+            for position in 1...usersNumber {
+                fakeResults.append(User(name: Name(first: "FakeFirstName \(position)", last: "FakeLastName \(position)"),
+                                        email: "FakeEmail \(position)",
+                                        phone:"FakePhone \(position)",
+                                        picture: Picture(thumbnail: "FakePicThumbnail \(position)",
+                                                         large: "FakePicLarge \(position)"),
                                         dob:Dob(age: 99),
-                                        location: Location(city: "FakeCity \(index)",
-                                                           state: "FakeState \(index)",
-                                                           country: "FakeCountry \(index)")))
+                                        location: Location(city: "FakeCity \(position)",
+                                                           state: "FakeState \(position)",
+                                                           country: "FakeCountry \(position)")))
             }
             return fakeResults
         }
@@ -97,14 +97,23 @@ final class HomeViewModelTests: XCTestCase {
     }
     
     func testDeleteShouldRemoveUserAtGivenIndexSet() async {
-        // Given the user at index 1
-        let fakeIndexSet = IndexSet(integer: 1)
+        // Given the user at position 2
+        let fakeUser = User(name: Name(first: "FakeFirstName 2",
+                                       last: ""),
+                            email: "FakeEmail 2",
+                            phone: "",
+                            picture: Picture(thumbnail: "",
+                                             large: ""),
+                            dob: Dob(age: 99),
+                            location: Location(city: "",
+                                               state: "",
+                                               country: ""))
         await sut.loadUsers()
-        expectation.fulfill()
-        await fulfillment(of: [expectation], timeout: expectationTimeOut)
         
         // When delete is called
-        sut.delete(at: fakeIndexSet)
+        sut.delete(fakeUser)
+        expectation.fulfill()
+        await fulfillment(of: [expectation], timeout: expectationTimeOut)
         
         // Then user is removed of users array and added to removedUsers array
         XCTAssertEqual("FakeFirstName 1", sut.users[0].name.first)
@@ -124,5 +133,55 @@ final class HomeViewModelTests: XCTestCase {
         // Then users array is empty and current page is equal to zero.
         XCTAssert(sut.users.isEmpty)
         XCTAssertEqual(0, sut.currentPage)
+    }
+    
+    func testSetBlackListedShouldAddUserToBlackListWhenItWasNotPreviously() async {
+        // Given a random user not in blacklist
+        let fakeUser = User(name: Name(first: "FakeFirstName 1",
+                                       last: ""),
+                            email: "FakeEmail 1",
+                            phone: "",
+                            picture: Picture(thumbnail: "",
+                                             large: ""),
+                            dob: Dob(age: 99),
+                            location: Location(city: "",
+                                               state: "",
+                                               country: ""),
+                            isBlackListed: false)
+        await sut.loadUsers()
+        expectation.fulfill()
+        await fulfillment(of: [expectation], timeout: expectationTimeOut)
+        
+        // When setBlackListed is called
+        sut.setBlackListed(fakeUser)
+        
+        // Then user is added to blacklist
+        XCTAssert((fakeUser.isBlackListed != nil))
+        XCTAssertEqual("FakeFirstName 1", sut.usersBlacklist[0].name.first)
+    }
+    
+    func testSetBlackListedShouldRemoveUserToBlackListWhenItWasPreviously() async {
+        // Given a random user not in blacklist
+        let fakeUser = User(name: Name(first: "FakeFirstName 1",
+                                       last: ""),
+                            email: "FakeEmail 1",
+                            phone: "",
+                            picture: Picture(thumbnail: "",
+                                             large: ""),
+                            dob: Dob(age: 99),
+                            location: Location(city: "",
+                                               state: "",
+                                               country: ""),
+                            isBlackListed: true)
+        await sut.loadUsers()
+        expectation.fulfill()
+        await fulfillment(of: [expectation], timeout: expectationTimeOut)
+        
+        // When setBlackListed is called
+        sut.setBlackListed(fakeUser)
+        
+        // Then user is added to blacklist
+        XCTAssert((fakeUser.isBlackListed != nil))
+        XCTAssert(sut.usersBlacklist.isEmpty)
     }
 }
