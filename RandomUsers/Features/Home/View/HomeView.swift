@@ -25,7 +25,7 @@ struct HomeView: View {
                         Button(role: .destructive) {
                             viewModel.delete(user)
                         } label: {
-                            Label("delete_swipe_action", systemImage: "trash")
+                            Label("delete_swipe_action", systemImage: K.Icons.deleteUser)
                         }
                         Button {
                             viewModel.setBlackListed(user)

@@ -13,12 +13,12 @@ struct UserView: View {
                             .scaledToFit()
                             .padding()
                     } else {
-                        Image("user-placeholder")
+                        Image(K.Images.userPlaceHolder)
                             .cornerRadius(20)
                             .padding()
                     }
                     if user.isBlackListed ?? false {
-                        Image(systemName:"x.circle")
+                        Image(systemName:K.Images.blackListMark)
                             .opacity(0.6)
                             .frame(maxWidth: .infinity,alignment: .center)
                             .scaleEffect(5.0)

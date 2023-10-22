@@ -18,8 +18,6 @@ final class HomeVM: ObservableObject, HomeViewModel {
     var showWarningMessage = ""
     var currentPage = 0
     private var error: RequestError?
-    private var blacklistIcon = "xmark.bin"
-    private var notBlacklistIcon = "arrow.up.bin"
     
     init(networkService: NetworkService) {
         self.networkService = networkService
@@ -27,7 +25,7 @@ final class HomeVM: ObservableObject, HomeViewModel {
     
     func loadUsers() async {
         currentPage += 1
-        let seed = "foobar"
+        let seed = K.Network.seedFoobar
         let params = NetworkParams(results: String(10), seed: seed, page: String(currentPage))
         await fetchUsers(with: params)
     }
@@ -144,6 +142,6 @@ final class HomeVM: ObservableObject, HomeViewModel {
     }
     
     func getBlacklistIcon(_ user: User) -> String {
-        !(user.isBlackListed ?? false) ? blacklistIcon : notBlacklistIcon
+        !(user.isBlackListed ?? false) ? K.Icons.blacklistIcon : K.Icons.notBlacklistIcon
     }
 }

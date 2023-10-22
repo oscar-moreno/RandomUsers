@@ -11,13 +11,13 @@ struct UserItemListView: View {
                         .cornerRadius(10)
                         .scaledToFit()
                 } else {
-                    Image("user-placeholder")
+                    Image(K.Images.userPlaceHolder)
                         .resizable()
                         .cornerRadius(20)
                         .scaledToFit()
                 }
                 if user.isBlackListed ?? false {
-                    Image(systemName:"x.circle")
+                    Image(systemName: K.Images.blackListMark)
                         .opacity(0.6)
                         .scaleEffect(3.0)
                         .foregroundStyle(.black)
