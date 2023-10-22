@@ -10,6 +10,7 @@ final class HomeVM: ObservableObject, HomeViewModel {
     @Published var users = [User]()
     @Published var showWarning = false
     @Published var usersSearchText = ""
+    @Published var displayBlackList = false
     
     var removedUsers = [User]()
     var usersBlacklist = [User]()

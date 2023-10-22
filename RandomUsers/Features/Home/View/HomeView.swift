@@ -4,8 +4,11 @@ struct HomeView: View {
     
     @ObservedObject private var viewModel: HomeVM
     
-    init(viewModel: HomeVM) {
+    let buildBlacklistView: () -> BlacklistView
+    
+    init(viewModel: HomeVM, buildBlacklistView: @escaping () -> BlacklistView) {
         self.viewModel = viewModel
+        self.buildBlacklistView = buildBlacklistView
     }
     
     var body: some View {
@@ -46,6 +49,19 @@ struct HomeView: View {
                     await viewModel.loadUsers()
                 }
             }
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button {
+                        viewModel.displayBlackList.toggle()
+                    } label: {
+                        Text("blacklist_title")
+                    }
+                    .sheet(isPresented: $viewModel.displayBlackList) {
+                        buildBlacklistView()
+                    }
+
+                }
+            }
             .navigationTitle("home_view_title")
         }
         .alert(isPresented: $viewModel.showWarning, content: {
@@ -68,6 +84,14 @@ struct HomeView: View {
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeView(viewModel: HomeVM(networkService: RandomUsersNetworkService(httpClient: URLSessionHTTPClient())))
+        HomeView(viewModel: 
+                    HomeVM(networkService:
+                            RandomUsersNetworkService(httpClient:
+                                                        URLSessionHTTPClient()))) {
+            BlacklistView(viewModel: BlacklistVM(parentViewModel:
+                                                    HomeVM(networkService:
+                                                            RandomUsersNetworkService(httpClient:
+                                                                                        URLSessionHTTPClient()))))
+        }
     }
 }

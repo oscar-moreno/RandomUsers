@@ -30,6 +30,8 @@
 		553DC5C92AE0781700850977 /* UserDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553DC5C82AE0781700850977 /* UserDataView.swift */; };
 		553DC5CC2AE078BE00850977 /* String+CapitalizeFirst.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553DC5CB2AE078BE00850977 /* String+CapitalizeFirst.swift */; };
 		55B07FF02AE255250098016C /* Debouncer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B07FEF2AE255250098016C /* Debouncer.swift */; };
+		55C1F2C12AE506A3004DB257 /* BlacklistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55C1F2C02AE506A3004DB257 /* BlacklistView.swift */; };
+		55C1F2C42AE506E2004DB257 /* BlacklistViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55C1F2C32AE506E2004DB257 /* BlacklistViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +70,8 @@
 		553DC5C82AE0781700850977 /* UserDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataView.swift; sourceTree = "<group>"; };
 		553DC5CB2AE078BE00850977 /* String+CapitalizeFirst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+CapitalizeFirst.swift"; sourceTree = "<group>"; };
 		55B07FEF2AE255250098016C /* Debouncer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Debouncer.swift; sourceTree = "<group>"; };
+		55C1F2C02AE506A3004DB257 /* BlacklistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlacklistView.swift; sourceTree = "<group>"; };
+		55C1F2C32AE506E2004DB257 /* BlacklistViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlacklistViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -213,6 +217,7 @@
 		553DC5AC2AE048D100850977 /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				55C1F2BE2AE50205004DB257 /* Blacklist */,
 				553DC5B12AE049D900850977 /* Home */,
 				553DC5AD2AE048DB00850977 /* User */,
 			);
@@ -301,6 +306,31 @@
 				55B07FEF2AE255250098016C /* Debouncer.swift */,
 			);
 			path = Debouncer;
+			sourceTree = "<group>";
+		};
+		55C1F2BE2AE50205004DB257 /* Blacklist */ = {
+			isa = PBXGroup;
+			children = (
+				55C1F2BF2AE5068A004DB257 /* View */,
+				55C1F2C22AE506CC004DB257 /* ViewModel */,
+			);
+			path = Blacklist;
+			sourceTree = "<group>";
+		};
+		55C1F2BF2AE5068A004DB257 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				55C1F2C02AE506A3004DB257 /* BlacklistView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		55C1F2C22AE506CC004DB257 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				55C1F2C32AE506E2004DB257 /* BlacklistViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -415,6 +445,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55C1F2C12AE506A3004DB257 /* BlacklistView.swift in Sources */,
 				553DC5BC2AE04B5000850977 /* RandomUsersEndpoints.swift in Sources */,
 				553DC5B52AE04A0500850977 /* HomeView.swift in Sources */,
 				553DC5BE2AE050D400850977 /* DependencyInjection.swift in Sources */,
@@ -429,6 +460,7 @@
 				553DC5A62AE0460B00850977 /* RandomUsersNetworkData.swift in Sources */,
 				553DC5C92AE0781700850977 /* UserDataView.swift in Sources */,
 				553DC5A02AE0459300850977 /* Endpoint.swift in Sources */,
+				55C1F2C42AE506E2004DB257 /* BlacklistViewModel.swift in Sources */,
 				55B07FF02AE255250098016C /* Debouncer.swift in Sources */,
 				553DC5912AE044D700850977 /* RandomUsersApp.swift in Sources */,
 				553DC5C72AE0771E00850977 /* UserView.swift in Sources */,

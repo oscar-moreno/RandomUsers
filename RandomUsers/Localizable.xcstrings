@@ -28,6 +28,22 @@
         }
       }
     },
+    "blacklist_empty_text" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "There are no users in blacklist"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No hay usuarios en la lista negra"
+          }
+        }
+      }
+    },
     "blacklist_swipe_action" : {
       "localizations" : {
         "en" : {
@@ -40,6 +56,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Enviar a lista negra"
+          }
+        }
+      }
+    },
+    "blacklist_title" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Blacklist"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lista negra"
           }
         }
       }

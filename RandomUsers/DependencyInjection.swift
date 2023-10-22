@@ -12,6 +12,10 @@ final class DependencyInjection {
     }
 
     func buildHomeView() -> HomeView {
-        HomeView(viewModel: homeViewModel)
+        HomeView(viewModel: homeViewModel, buildBlacklistView: buildBlacklistView)
+    }
+    
+    private func buildBlacklistView() -> BlacklistView {
+        BlacklistView(viewModel: BlacklistVM(parentViewModel: homeViewModel))
     }
 }
