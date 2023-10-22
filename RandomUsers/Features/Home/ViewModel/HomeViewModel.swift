@@ -60,6 +60,14 @@ final class HomeVM: ObservableObject, HomeViewModel {
                 self.users.removeAll(where: { user in
                     self.removedUsers.contains(where: { $0.email == user.email })
                 })
+                self.users = self.users.map { user in
+                    if self.usersBlacklist.contains(where: { $0.email == user.email }) {
+                        var user = user
+                        user.isBlackListed = true
+                        return user
+                    }
+                    return user
+                }
             }
         } catch {
             DispatchQueue.main.async {
