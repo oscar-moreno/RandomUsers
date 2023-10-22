@@ -140,7 +140,16 @@ final class HomeVM: ObservableObject, HomeViewModel {
         }
     }
     
-    func getBlacklistIcon(_ user: User) -> String {
-        !(user.isBlackListed ?? false) ? K.Icons.blacklistIcon : K.Icons.notBlacklistIcon
+    func getBlacklistActionInfo(of user: User) -> (String, String) {
+        var blacklistActionInfo = (icon:"", label:"")
+        
+        blacklistActionInfo.icon = !(user.isBlackListed ?? false) ?
+        K.Icons.blacklistIcon : K.Icons.notBlacklistIcon
+        
+        blacklistActionInfo.label = !(user.isBlackListed ?? false) ?
+        NSLocalizedString(K.Labels.blacklistSendTo, comment: "")  :
+        NSLocalizedString(K.Labels.blacklistRemove, comment: "")
+        
+        return blacklistActionInfo
     }
 }

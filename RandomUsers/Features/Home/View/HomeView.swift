@@ -30,8 +30,8 @@ struct HomeView: View {
                         Button {
                             viewModel.setBlackListed(user)
                         } label: {
-                            let blackListIcon = viewModel.getBlacklistIcon(user)
-                            Label("blacklist_swipe_action", systemImage: blackListIcon)
+                            let blackListInfo = viewModel.getBlacklistActionInfo(of: user)
+                            Label(blackListInfo.1, systemImage: blackListInfo.0)
                         }
                     }
                     .task {

@@ -44,22 +44,6 @@
         }
       }
     },
-    "blacklist_swipe_action" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Send to blacklist"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Enviar a lista negra"
-          }
-        }
-      }
-    },
     "blacklist_title" : {
       "localizations" : {
         "en" : {
@@ -192,6 +176,23 @@
         }
       }
     },
+    "remove_from_blacklist" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Remove from blacklist"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eliminar de lista negra"
+          }
+        }
+      }
+    },
     "search_prompt" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -205,6 +206,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Buscar"
+          }
+        }
+      }
+    },
+    "send_to_blacklist" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Send to blacklist"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enviar a lista negra"
           }
         }
       }

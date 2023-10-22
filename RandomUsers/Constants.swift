@@ -11,4 +11,9 @@ struct K {
         static let blackListMark = "x.circle"
         static let userPlaceHolder = "user-placeholder"
     }
+    
+    struct Labels {
+        static let blacklistSendTo = "send_to_blacklist"
+        static let blacklistRemove = "remove_from_blacklist"
+    }
 }
