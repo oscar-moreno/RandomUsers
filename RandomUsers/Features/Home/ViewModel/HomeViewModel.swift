@@ -25,8 +25,7 @@ final class HomeVM: ObservableObject, HomeViewModel {
     
     func loadUsers() async {
         currentPage += 1
-        let seed = K.Network.seedFoobar
-        let params = NetworkParams(results: String(10), seed: seed, page: String(currentPage))
+        let params = NetworkParams(results: String(10), page: String(currentPage))
         await fetchUsers(with: params)
     }
     

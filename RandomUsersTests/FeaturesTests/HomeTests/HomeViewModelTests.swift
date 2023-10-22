@@ -59,7 +59,7 @@ final class HomeViewModelTests: XCTestCase {
     
     func testFetchUsersShouldSaveUsersInViewModel() async {
         // When fetchUsers is called
-        await sut.fetchUsers(with: NetworkParams(results: "", seed: "", page: ""))
+        await sut.fetchUsers(with: NetworkParams(results: "", page: ""))
         expectation.fulfill()
         await fulfillment(of: [expectation], timeout: expectationTimeOut)
         

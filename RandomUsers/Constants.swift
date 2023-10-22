@@ -11,8 +11,4 @@ struct K {
         static let blackListMark = "x.circle"
         static let userPlaceHolder = "user-placeholder"
     }
-    
-    struct Network {
-        static let seedFoobar = "foobar"
-    }
 }

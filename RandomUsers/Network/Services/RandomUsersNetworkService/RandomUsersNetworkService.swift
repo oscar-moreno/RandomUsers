@@ -6,15 +6,16 @@ protocol NetworkService {
 
 struct NetworkParams {
     let results: String?
-    let seed: String?
     let page: String?
 }
 
 struct RandomUsersNetworkService: NetworkService {
     private let httpClient: HTTPClient
+    private let randomSeed: String
     
     init(httpClient: HTTPClient) {
         self.httpClient = httpClient
+        randomSeed = String.createRandomString()
     }
     
     func getUsers(with params: NetworkParams) async throws -> Users {
@@ -23,7 +24,7 @@ struct RandomUsersNetworkService: NetworkService {
         
         var query = [String: String]()
         query[RandomUsersNetworkData.resultsParam] = params.results
-        query[RandomUsersNetworkData.seedParam] = params.seed
+        query[RandomUsersNetworkData.seedParam] = randomSeed
         query[RandomUsersNetworkData.pageParam] = params.page
         
         query.forEach { key, value in
